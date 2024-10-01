@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Interpret the arguments as command name and section. As with `man`,
+# the section is optional and comes first if present.
+if [[ $# -lt 2 ]]; then
+  cmd=${1}
+  sec=''
+else
+  cmd=${2}
+  sec=${1}
+fi
+
+# Get the formatted man page, filter out backspaces and convert tabs
+# to spaces, and open the text in a new BBEdit document. Set the title
+# of the window and scroll to the top.
+man $sec $cmd | col -bx | bbedit --view-top --clean -t $cmd
